@@ -115,6 +115,8 @@ class WebLayer:
             config = f.read()
             f.close()
             return config
+        elif self.name == "OpenTopoMap":
+            return "http://c.tile.opentopomap.org/{z}/{x}/{y}.png"
         else:
             return None
 

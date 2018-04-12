@@ -33,7 +33,7 @@ from openlayers_plugin_layer_type import OpenlayersPluginLayerType
 from tools_network import getProxy
 from weblayers.weblayer_registry import WebLayerTypeRegistry
 from weblayers.google_maps import OlGooglePhysicalLayer, OlGoogleStreetsLayer, OlGoogleHybridLayer, OlGoogleSatelliteLayer
-from weblayers.osm import OlOpenStreetMapLayer, OlOSMHumanitarianDataModelLayer
+from weblayers.osm import OlOpenStreetMapLayer, OlOSMHumanitarianDataModelLayer, OlOpentopoLayer
 from weblayers.osm_thunderforest import OlOpenCycleMapLayer, OlOCMLandscapeLayer, OlOCMPublicTransportLayer, OlOCMOutdoorstLayer, OlOCMTransportDarkLayer, OlOCMSpinalMapLayer, OlOCMPioneerLayer, OlOCMMobileAtlasLayer, OlOCMNeighbourhoodLayer
 from weblayers.bing_maps import OlBingRoadLayer, OlBingAerialLayer, OlBingAerialLabelledLayer
 from weblayers.apple_maps import OlAppleiPhotoMapLayer
@@ -96,6 +96,7 @@ class OpenlayersPlugin:
 
         # ID 8-10 was Yahoo
         self._olLayerTypeRegistry.register(OlOSMHumanitarianDataModelLayer())
+        self._olLayerTypeRegistry.register(OlOpentopoLayer())
 
         self._olLayerTypeRegistry.register(OlOCMOutdoorstLayer())
         self._olLayerTypeRegistry.register(OlOCMTransportDarkLayer())
@@ -185,8 +186,7 @@ class OpenlayersPlugin:
 
             # last added layer is new reference
             self.setReferenceLayer(layer)
-
-            if not layerType.hasGdalTMS():
+            if not layerType.hasGdalTMS() and layerType.displayName is not 'OpenTopoMap':
                 msg = "Printing and rotating of Javascript API " \
                       "based layers is currently not supported!"
                 self.iface.messageBar().pushMessage(

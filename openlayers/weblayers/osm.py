@@ -42,3 +42,9 @@ class OlOSMHumanitarianDataModelLayer(OlOSMLayer):
 
     def __init__(self):
         OlOSMLayer.__init__(self, name='OSM Humanitarian Data Model', html='osm_hdm.html', gdalTMS='osm_hdm.xml')
+
+
+class OlOpentopoLayer(OlOSMLayer):
+
+    def __init__(self):
+        OlOSMLayer.__init__(self, name='OpenTopoMap', html='opentopo.html')
